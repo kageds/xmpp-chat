@@ -222,10 +222,11 @@ class erLhcoreClassExtensionXmppserviceHandler
         }
         
         // Delete user
-        $data = array(
-            "user" => $userParts[0],
-            "host" => $params['xmpp_host']
-        );
+/*
+*        $data = array(
+*            "user" => $userParts[0],
+*           "host" => $params['xmpp_host']
+*        );
         
         try {
             
@@ -251,10 +252,11 @@ class erLhcoreClassExtensionXmppserviceHandler
             
             if (erLhcoreClassModule::getExtensionInstance('erLhcoreClassExtensionXmppservice')->settings['debug'] == true) {
                 erLhcoreClassLog::write(print_r($e, true));
-            }
-            
-            throw new Exception('Could not delete user!');
-        }
+*            }
+*            
+*            throw new Exception('Could not delete user!');
+*        }
+*/
     }
 
     /**
@@ -683,12 +685,13 @@ class erLhcoreClassExtensionXmppserviceHandler
      */
     public static function registerOperator($params = array())
     {        
-        try {
-            if ($params['handler'] == 'rpc') {
                 
-                $rpc = new \GameNet\Jabber\RpcClient(array(
-                    'server' => $params['rpc_server'],
-                    'host' => $params['xmpp_host'],
+/*
+ *       try {
+ *           if ($params['handler'] == 'rpc') {
+ *                $rpc = new \GameNet\Jabber\RpcClient(array(
+ *                   'server' => $params['rpc_server'],
+ *                   'host' => $params['xmpp_host'],
                     'account_host' => $params['rpc_account_host'],
                     'username' => $params['rpc_username'],
                     'password' => $params['rpc_password']
@@ -714,15 +717,15 @@ class erLhcoreClassExtensionXmppserviceHandler
                 erLhcoreClassLog::write(print_r($e, true));
             }
             
-            throw new Exception('Could not register operator in XMPP server!');
-        }
+*            throw new Exception('Could not register operator in XMPP server!');
+*        }
+*/               
         
         // Append automated hosting subdomain if required
         $subdomainUser = erLhcoreClassModule::getExtensionInstance('erLhcoreClassExtensionXmppservice')->settings['subdomain'];
         if ($subdomainUser != '') {
             $subdomainUser = '.' . $subdomainUser;
         }
-               
         try {
             
             if ($params['handler'] == 'rpc') {

@@ -805,7 +805,7 @@ class erLhcoreClassExtensionXmppservice
                         )
                     ));
                 }
-                
+
                 // Online user is not assigned or xmpp account does not exists
                 // So create an account based on chat
                 if ($xmppAccount === false) {
@@ -839,11 +839,16 @@ class erLhcoreClassExtensionXmppservice
                 if ($this->settings['subdomain'] != '') {
                     $subdomainUser = '.' . $this->settings['subdomain'];
                 }
-                
+ 
+                $visitor = 'visitor';
+                if ($params['ou']->nick != '') {
+                    $visitor = $params['ou']->nick;
+                }
+
                 // Create DB record for XMPP user
                 $xmppAccount = new erLhcoreClassModelXMPPAccount();
                 $xmppAccount->lactivity = $xmppAccount->ctime = time();
-                $xmppAccount->username = 'visitor.' . $params['ou']->id . $subdomainUser . '@' . $this->settings['xmpp_host'];
+                $xmppAccount->username = $visitor . '.' . $params['ou']->id . $subdomainUser . '@' . $this->settings['xmpp_host'];
                 $xmppAccount->password = substr(md5(microtime() . rand(0, 100) . $params['ou']->vid), 0, 20);
                 $xmppAccount->user_id = $params['ou']->id;
                 $xmppAccount->type = erLhcoreClassModelXMPPAccount::USER_TYPE_VISITOR;
